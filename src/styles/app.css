@@ -1,0 +1,17 @@
+:root {
+  background: #09090b;
+  color: white;
+  font-family: Inter, sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+.app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
