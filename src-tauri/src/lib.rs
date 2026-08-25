@@ -2,6 +2,7 @@
 
 use std::path::{Path, PathBuf};
 
+use base64::Engine;
 use lofty::{
     config::{ParseOptions, ParsingMode},
     file::{AudioFile, TaggedFileExt},
@@ -49,7 +50,7 @@ struct Track {
 
 #[tauri::command]
 fn greet(name: &str) -> String {
-    format!("Hello, {}! You've been greeted from Rust!", name)
+    format!("Hello, {}! You've been greeted from the Rust backend!", name)
 }
 
 #[tauri::command]
@@ -102,8 +103,6 @@ fn scan_music_library(path: String) -> Result<Vec<Track>, String> {
                 );
 
                 /*
-                 * IMPORTANT:
-                 *
                  * Metadata is optional.
                  *
                  * Even if Lofty cannot parse a malformed FLAC/MP3 tag,
@@ -135,10 +134,13 @@ fn read_track(path: &Path) -> Result<Track, String> {
      * Music players should be tolerant of imperfect metadata.
      * We don't want one broken timestamp/tag to invalidate the
      * entire audio file.
+     *
+     * read_cover_art(true) tells Lofty to actually parse embedded
+     * artwork from supported tags.
      */
     let options = ParseOptions::new()
         .parsing_mode(ParsingMode::Relaxed)
-        .read_cover_art(false);
+        .read_cover_art(true);
 
     let tagged_file = Probe::open(path)
         .map_err(|error| {
@@ -157,6 +159,61 @@ fn read_track(path: &Path) -> Result<Track, String> {
         .as_millis() as u64;
 
     let tag = tagged_file.primary_tag();
+
+    /*
+     * Try to find embedded artwork.
+     *
+     * Priority:
+     *
+     * 1. Front cover
+     * 2. Any other embedded picture
+     *
+     * This is intentionally not limited to CoverFront because
+     * some music files contain artwork with a different picture type.
+     */
+    let artwork = tag.and_then(|tag| {
+        let picture = tag
+            .pictures()
+            .iter()
+            .find(|picture| {
+                matches!(
+                    picture.pic_type(),
+                    lofty::picture::PictureType::CoverFront
+                )
+            })
+            .or_else(|| tag.pictures().first());
+
+        let picture = picture?;
+
+        let mime = picture
+            .mime_type()
+            .map(|mime| mime.to_string())
+            .or_else(|| {
+                Some(detect_image_mime(
+                    picture.data(),
+                ))
+            })?;
+
+        let encoded =
+            base64::engine::general_purpose::STANDARD
+                .encode(picture.data());
+
+        Some(format!(
+            "data:{};base64,{}",
+            mime,
+            encoded
+        ))
+    });
+
+    println!(
+        "[Donya] artwork: {} -> {}",
+        path.display(),
+        if artwork.is_some() {
+            "FOUND"
+        } else {
+            "NOT FOUND"
+        }
+    );
 
     let title = tag
         .and_then(|tag| tag.title())
@@ -179,12 +236,15 @@ fn read_track(path: &Path) -> Result<Track, String> {
         .map(|value| value.trim().to_string())
         .filter(|value| !value.is_empty());
 
-    let year = tag.and_then(|tag| tag.year())
+    let year = tag
+        .and_then(|tag| tag.year())
         .and_then(|value| i32::try_from(value).ok());
 
-    let track_number = tag.and_then(|tag| tag.track());
+    let track_number =
+        tag.and_then(|tag| tag.track());
 
-    let disc_number = tag.and_then(|tag| tag.disk());
+    let disc_number =
+        tag.and_then(|tag| tag.disk());
 
     Ok(Track {
         id: generate_track_id(path),
@@ -201,8 +261,8 @@ fn read_track(path: &Path) -> Result<Track, String> {
         /*
          * Keep this optional for now.
          *
-         * We intentionally don't depend on ItemKey because your
-         * installed Lofty version has API differences here.
+         * We intentionally don't depend on ItemKey because
+         * your installed Lofty version has API differences here.
          */
         album_artist: None,
 
@@ -216,16 +276,16 @@ fn read_track(path: &Path) -> Result<Track, String> {
 
         format: detect_format(path),
 
-        /*
-         * Artwork can be implemented later.
-         *
-         * It should not participate in the initial scanning path.
-         */
-        artwork: None,
+        artwork,
     })
 }
 
 fn fallback_track(path: &Path) -> Track {
+    println!(
+        "[Donya] using fallback metadata: {}",
+        path.display()
+    );
+
     Track {
         id: generate_track_id(path),
 
@@ -307,15 +367,60 @@ fn fallback_title(path: &Path) -> String {
         .unwrap_or_else(|| "Unknown track".to_string())
 }
 
+/*
+ * Detect image MIME type when the embedded picture doesn't
+ * provide a MIME type.
+ *
+ * This makes the artwork extraction a little more tolerant.
+ */
+fn detect_image_mime(data: &[u8]) -> String {
+    if data.starts_with(&[
+        0xFF, 0xD8, 0xFF,
+    ]) {
+        return "image/jpeg".to_string();
+    }
+
+    if data.starts_with(b"\x89PNG\r\n\x1a\n") {
+        return "image/png".to_string();
+    }
+
+    if data.starts_with(b"GIF87a")
+        || data.starts_with(b"GIF89a")
+    {
+        return "image/gif".to_string();
+    }
+
+    if data.len() >= 12
+        && &data[0..4] == b"RIFF"
+        && &data[8..12] == b"WEBP"
+    {
+        return "image/webp".to_string();
+    }
+
+    /*
+     * JPEG is a reasonable fallback for unknown image data,
+     * but ideally Lofty should provide the MIME type.
+     */
+    "image/jpeg".to_string()
+}
+
 fn generate_track_id(path: &Path) -> String {
     use std::collections::hash_map::DefaultHasher;
-    use std::hash::{Hash, Hasher};
+    use std::hash::{
+        Hash,
+        Hasher,
+    };
 
-    let mut hasher = DefaultHasher::new();
+    let mut hasher =
+        DefaultHasher::new();
 
-    path.to_string_lossy().hash(&mut hasher);
+    path.to_string_lossy()
+        .hash(&mut hasher);
 
-    format!("{:016x}", hasher.finish())
+    format!(
+        "{:016x}",
+        hasher.finish()
+    )
 }
 
 #[cfg_attr(
@@ -325,21 +430,21 @@ fn generate_track_id(path: &Path) -> String {
 pub fn run() {
     tauri::Builder::default()
         .plugin(
-            tauri_plugin_dialog::init()
+            tauri_plugin_dialog::init(),
         )
         .plugin(
-            tauri_plugin_opener::init()
+            tauri_plugin_opener::init(),
         )
         .invoke_handler(
             tauri::generate_handler![
                 greet,
                 scan_music_library
-            ]
+            ],
         )
         .run(
-            tauri::generate_context!()
+            tauri::generate_context!(),
         )
         .expect(
-            "error while running tauri application"
+            "error while running tauri application",
         );
 }
