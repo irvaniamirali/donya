@@ -1,7 +1,4 @@
-import {
-  Pause,
-  Play,
-} from "lucide-react";
+import { Pause, Play } from "lucide-react";
 
 import type { Track } from "../types/music";
 
@@ -13,11 +10,14 @@ type HomeProps = {
   currentTrack: Track | null;
   playing: boolean;
 
-  onPlayTrack: (
-    track: Track,
-  ) => void;
-
+  onPlayTrack: (track: Track) => void;
   onTogglePlaying: () => void;
+
+  isFavorite: (trackId: string) => boolean;
+  onToggleFavorite: (trackId: string) => void;
+
+  onGoToAlbum: (track: Track) => void;
+  onGoToArtist: (track: Track) => void;
 };
 
 export function Home({
@@ -26,6 +26,10 @@ export function Home({
   playing,
   onPlayTrack,
   onTogglePlaying,
+  isFavorite,
+  onToggleFavorite,
+  onGoToAlbum,
+  onGoToArtist,
 }: HomeProps) {
   const recentlyAdded = tracks;
 
@@ -33,18 +37,9 @@ export function Home({
     <>
       <section className="hero">
         <div>
-          <span className="eyebrow">
-            YOUR LIBRARY
-          </span>
-
-          <h1>
-            Good evening.
-          </h1>
-
-          <p>
-            Your local music,
-            organized your way.
-          </p>
+          <span className="eyebrow">YOUR LIBRARY</span>
+          <h1>Good evening.</h1>
+          <p>Your local music, organized your way.</p>
         </div>
 
         {currentTrack && (
@@ -57,10 +52,7 @@ export function Home({
             ) : (
               <Play size={17} />
             )}
-
-            {playing
-              ? "Pause"
-              : "Play"}
+            {playing ? "Pause" : "Play"}
           </button>
         )}
       </section>
@@ -68,14 +60,8 @@ export function Home({
       <section className="content-section">
         <div className="section-title-row">
           <div>
-            <h2>
-              Recently added
-            </h2>
-
-            <p>
-              Music in your local
-              library
-            </p>
+            <h2>Recently added</h2>
+            <p>Music in your local library</p>
           </div>
 
           <span className="text-button">
@@ -88,6 +74,10 @@ export function Home({
           currentTrack={currentTrack}
           playing={playing}
           onPlay={onPlayTrack}
+          isFavorite={isFavorite}
+          onToggleFavorite={onToggleFavorite}
+          onGoToAlbum={onGoToAlbum}
+          onGoToArtist={onGoToArtist}
         />
       </section>
     </>

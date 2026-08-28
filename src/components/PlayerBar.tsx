@@ -12,44 +12,31 @@ import {
   VolumeX,
 } from "lucide-react";
 
-import type {
-  PlayerRepeatMode,
-  Track,
-} from "../types/music";
+import type { PlayerRepeatMode, Track } from "../types/music";
 
 import { Artwork } from "./Artwork";
 
 type PlayerBarProps = {
   currentTrack: Track;
-
   playing: boolean;
-
   liked: boolean;
-
   shuffle: boolean;
   repeat: PlayerRepeatMode;
-
   muted: boolean;
   volume: number;
-
   currentTime: number;
   duration: number;
-
   onTogglePlaying: () => void;
   onPrevious: () => void;
   onNext: () => void;
-
   onToggleLiked: () => void;
-
   onToggleShuffle: () => void;
   onToggleRepeat: () => void;
-
   onToggleMuted: () => void;
   onVolumeChange: (value: number) => void;
-
   onSeek: (time: number) => void;
-
   onQueueToggle: () => void;
+  onOpenNowPlaying: () => void;
 };
 
 export function PlayerBar({
@@ -72,45 +59,41 @@ export function PlayerBar({
   onVolumeChange,
   onSeek,
   onQueueToggle,
+  onOpenNowPlaying,
 }: PlayerBarProps) {
   const progress =
-    duration > 0
-      ? (currentTime / duration) * 100
-      : 0;
+    duration > 0 ? (currentTime / duration) * 100 : 0;
+
+  const volumeFill = muted ? 0 : volume;
 
   return (
     <footer className="player">
       <div className="player-track">
-        <Artwork
-          color="linear-gradient(135deg, #292929, #666)"
-          size="small"
-        />
+        <button
+          className="player-track-info"
+          onClick={onOpenNowPlaying}
+          aria-label="Open now playing"
+        >
+          <Artwork
+            artwork={currentTrack.artwork}
+            color="linear-gradient(135deg, #292929, #666)"
+            size="small"
+          />
 
-        <div className="now-playing">
-          <strong>
-            {currentTrack.title}
-          </strong>
-
-          <span>
-            {currentTrack.artist ??
-              "Unknown artist"}
-          </span>
-        </div>
+          <div className="now-playing">
+            <strong>{currentTrack.title}</strong>
+            <span>{currentTrack.artist ?? "Unknown artist"}</span>
+          </div>
+        </button>
 
         <button
-          className={`player-like ${
-            liked ? "liked" : ""
-          }`}
+          className={`player-like ${liked ? "liked" : ""}`}
           onClick={onToggleLiked}
           aria-label="Like track"
         >
           <Heart
             size={16}
-            fill={
-              liked
-                ? "currentColor"
-                : "none"
-            }
+            fill={liked ? "currentColor" : "none"}
           />
         </button>
       </div>
@@ -132,31 +115,18 @@ export function PlayerBar({
             onClick={onPrevious}
             aria-label="Previous track"
           >
-            <SkipBack
-              size={18}
-              fill="currentColor"
-            />
+            <SkipBack size={18} fill="currentColor" />
           </button>
 
           <button
             className="play-button"
             onClick={onTogglePlaying}
-            aria-label={
-              playing
-                ? "Pause"
-                : "Play"
-            }
+            aria-label={playing ? "Pause" : "Play"}
           >
             {playing ? (
-              <Pause
-                size={18}
-                fill="currentColor"
-              />
+              <Pause size={18} fill="currentColor" />
             ) : (
-              <Play
-                size={18}
-                fill="currentColor"
-              />
+              <Play size={18} fill="currentColor" />
             )}
           </button>
 
@@ -165,17 +135,12 @@ export function PlayerBar({
             onClick={onNext}
             aria-label="Next track"
           >
-            <SkipForward
-              size={18}
-              fill="currentColor"
-            />
+            <SkipForward size={18} fill="currentColor" />
           </button>
 
           <button
             className={`control-button ${
-              repeat !== "off"
-                ? "selected"
-                : ""
+              repeat !== "off" ? "selected" : ""
             }`}
             onClick={onToggleRepeat}
             aria-label="Repeat"
@@ -189,9 +154,7 @@ export function PlayerBar({
         </div>
 
         <div className="progress-row">
-          <span>
-            {formatTime(currentTime)}
-          </span>
+          <span>{formatTime(currentTime)}</span>
 
           <input
             className="progress"
@@ -201,21 +164,17 @@ export function PlayerBar({
             step={0.1}
             value={currentTime}
             onChange={(event) =>
-              onSeek(
-                Number(
-                  event.target.value,
-                ),
-              )
+              onSeek(Number(event.target.value))
             }
-            style={{
-              "--progress": `${progress}%`,
-            } as React.CSSProperties}
+            style={
+              {
+                "--progress": `${progress}%`,
+              } as React.CSSProperties
+            }
             aria-label="Track progress"
           />
 
-          <span>
-            {formatTime(duration)}
-          </span>
+          <span>{formatTime(duration)}</span>
         </div>
       </div>
 
@@ -232,11 +191,7 @@ export function PlayerBar({
           <button
             className="control-button"
             onClick={onToggleMuted}
-            aria-label={
-              muted
-                ? "Unmute"
-                : "Mute"
-            }
+            aria-label={muted ? "Unmute" : "Mute"}
           >
             {muted || volume === 0 ? (
               <VolumeX size={17} />
@@ -250,13 +205,14 @@ export function PlayerBar({
             type="range"
             min={0}
             max={100}
-            value={muted ? 0 : volume}
+            value={volumeFill}
             onChange={(event) =>
-              onVolumeChange(
-                Number(
-                  event.target.value,
-                ),
-              )
+              onVolumeChange(Number(event.target.value))
+            }
+            style={
+              {
+                "--volume": `${volumeFill}%`,
+              } as React.CSSProperties
             }
             aria-label="Volume"
           />
@@ -267,25 +223,13 @@ export function PlayerBar({
 }
 
 function formatTime(seconds: number) {
-  if (
-    !Number.isFinite(seconds) ||
-    seconds < 0
-  ) {
+  if (!Number.isFinite(seconds) || seconds < 0) {
     return "0:00";
   }
 
-  const totalSeconds = Math.floor(
-    seconds,
-  );
+  const totalSeconds = Math.floor(seconds);
+  const minutes = Math.floor(totalSeconds / 60);
+  const remaining = totalSeconds % 60;
 
-  const minutes = Math.floor(
-    totalSeconds / 60,
-  );
-
-  const remaining =
-    totalSeconds % 60;
-
-  return `${minutes}:${remaining
-    .toString()
-    .padStart(2, "0")}`;
+  return `${minutes}:${remaining.toString().padStart(2, "0")}`;
 }
