@@ -4,7 +4,7 @@ export type Page =
   | "Albums"
   | "Artists"
   | "Favorites"
-  | "Downloads";
+  | "Settings";
 
 export type AudioFormat =
   | "FLAC"
@@ -54,4 +54,20 @@ export type PlayerState = {
 
   shuffle: boolean;
   repeat: PlayerRepeatMode;
+};
+
+export type AlbumGroup = {
+  key: string;
+  name: string;
+  artist: string;
+  artwork: string | null;
+  tracks: Track[];
+};
+
+export type ArtistGroup = {
+  name: string;
+  artwork: string | null;
+  albumCount: number;
+  trackCount: number;
+  tracks: Track[];
 };
