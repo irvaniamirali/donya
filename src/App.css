@@ -9,7 +9,6 @@
     "SF Pro Text",
     system-ui,
     sans-serif;
-
   color: #1f1f1f;
   background: #f7f7f5;
   font-synthesis: none;
@@ -19,14 +18,11 @@
   --background: #f7f7f5;
   --surface: #ffffff;
   --surface-hover: #f1f1ef;
-
   --border: #e7e7e3;
   --border-strong: #ddddda;
-
   --text: #1f1f1f;
   --text-secondary: #666662;
   --text-muted: #92928c;
-
   --sidebar-width: 228px;
   --player-height: 76px;
 }
@@ -84,12 +80,9 @@ input:focus-visible {
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
-
   width: var(--sidebar-width);
   height: calc(100% - var(--player-height));
-
   padding: 20px 12px 12px;
-
   background: #f4f4f1;
   border-right: 1px solid var(--border);
 }
@@ -98,12 +91,9 @@ input:focus-visible {
   display: flex;
   align-items: center;
   gap: 10px;
-
   height: 38px;
   padding: 0 9px;
-
   margin-bottom: 25px;
-
   color: var(--text);
   font-size: 15px;
   font-weight: 600;
@@ -113,10 +103,8 @@ input:focus-visible {
 .brand-mark {
   display: grid;
   place-items: center;
-
   width: 26px;
   height: 26px;
-
   color: white;
   background: #242424;
   border-radius: 7px;
@@ -129,9 +117,7 @@ input:focus-visible {
 .section-label {
   padding: 0 10px;
   margin-bottom: 7px;
-
   color: #999992;
-
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.09em;
@@ -141,21 +127,15 @@ input:focus-visible {
   display: flex;
   align-items: center;
   gap: 11px;
-
   width: 100%;
   height: 36px;
-
   padding: 0 10px;
-
   color: #676762;
   background: transparent;
   border-radius: 7px;
-
   font-size: 12px;
   font-weight: 500;
-
   text-align: left;
-
   transition:
     background 120ms ease,
     color 120ms ease;
@@ -176,7 +156,6 @@ input:focus-visible {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   padding-right: 5px;
 }
 
@@ -187,14 +166,11 @@ input:focus-visible {
 .icon-button {
   display: grid;
   place-items: center;
-
   width: 32px;
   height: 32px;
-
   color: #777771;
   background: transparent;
   border-radius: 7px;
-
   transition:
     background 120ms ease,
     color 120ms ease;
@@ -214,17 +190,12 @@ input:focus-visible {
   display: flex;
   align-items: center;
   gap: 9px;
-
   width: 100%;
   height: 33px;
-
   padding: 0 10px;
-
   color: #777771;
   background: transparent;
-
   border-radius: 7px;
-
   font-size: 12px;
   text-align: left;
 }
@@ -249,25 +220,19 @@ input:focus-visible {
   display: flex;
   align-items: center;
   gap: 9px;
-
   padding: 9px 7px 3px;
-
   border-top: 1px solid var(--border);
-
   color: #888882;
 }
 
 .user-avatar {
   display: grid;
   place-items: center;
-
   width: 27px;
   height: 27px;
-
   color: #fff;
   background: #30302e;
   border-radius: 8px;
-
   font-size: 10px;
   font-weight: 600;
 }
@@ -287,7 +252,6 @@ input:focus-visible {
 
 .user-info small {
   margin-top: 2px;
-
   color: #999992;
   font-size: 9px;
 }
@@ -298,11 +262,9 @@ input:focus-visible {
 
 .main {
   position: relative;
-
   flex: 1;
   min-width: 0;
   height: calc(100% - var(--player-height));
-
   overflow: auto;
 }
 
@@ -310,18 +272,13 @@ input:focus-visible {
   position: sticky;
   top: 0;
   z-index: 10;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   height: 65px;
-
   padding: 0 31px;
-
   background: rgba(247, 247, 245, 0.92);
   border-bottom: 1px solid rgba(231, 231, 227, 0.8);
-
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
 }
@@ -330,7 +287,6 @@ input:focus-visible {
   display: flex;
   align-items: center;
   gap: 8px;
-
   font-size: 11px;
   font-weight: 500;
 }
@@ -353,18 +309,13 @@ input:focus-visible {
   display: flex;
   align-items: center;
   gap: 8px;
-
   width: 255px;
   height: 32px;
-
   padding: 0 8px 0 10px;
-
   color: #9b9b95;
   background: #efefec;
-
   border: 1px solid transparent;
   border-radius: 7px;
-
   transition:
     background 120ms ease,
     border 120ms ease;
@@ -378,12 +329,10 @@ input:focus-visible {
 .search input {
   flex: 1;
   min-width: 0;
-
   color: var(--text);
   background: transparent;
   border: 0;
   outline: none;
-
   font-size: 11px;
 }
 
@@ -393,11 +342,9 @@ input:focus-visible {
 
 .search kbd {
   padding: 2px 5px;
-
   color: #999992;
   background: #e4e4e1;
   border-radius: 4px;
-
   font-family: inherit;
   font-size: 9px;
 }
@@ -405,7 +352,6 @@ input:focus-visible {
 .search-clear {
   display: grid;
   place-items: center;
-
   color: #8b8b85;
   background: transparent;
 }
@@ -424,19 +370,14 @@ input:focus-visible {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-
   padding-bottom: 34px;
-
   border-bottom: 1px solid var(--border);
 }
 
 .eyebrow {
   display: block;
-
   margin-bottom: 10px;
-
   color: #a0a099;
-
   font-size: 9px;
   font-weight: 600;
   letter-spacing: 0.12em;
@@ -445,9 +386,7 @@ input:focus-visible {
 .hero h1,
 .page-heading h1 {
   margin: 0;
-
   color: var(--text);
-
   font-size: 30px;
   line-height: 1.1;
   font-weight: 600;
@@ -457,9 +396,7 @@ input:focus-visible {
 .hero p,
 .page-heading p {
   margin: 9px 0 0;
-
   color: #888883;
-
   font-size: 12px;
 }
 
@@ -467,19 +404,13 @@ input:focus-visible {
   display: flex;
   align-items: center;
   gap: 8px;
-
   height: 33px;
-
   padding: 0 13px;
-
   color: white;
   background: #252523;
-
   border-radius: 7px;
-
   font-size: 11px;
   font-weight: 500;
-
   transition:
     transform 120ms ease,
     background 120ms ease;
@@ -502,13 +433,11 @@ input:focus-visible {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-
   margin-bottom: 17px;
 }
 
 .section-title-row h2 {
   margin: 0;
-
   font-size: 15px;
   font-weight: 600;
   letter-spacing: -0.025em;
@@ -516,16 +445,13 @@ input:focus-visible {
 
 .section-title-row p {
   margin: 5px 0 0;
-
   color: #999993;
-
   font-size: 10px;
 }
 
 .text-button {
   color: #777771;
   background: transparent;
-
   font-size: 10px;
   font-weight: 500;
 }
@@ -546,12 +472,9 @@ input:focus-visible {
 
 .album-card {
   min-width: 0;
-
   padding: 0;
-
   color: var(--text);
   background: transparent;
-
   text-align: left;
 }
 
@@ -559,15 +482,11 @@ input:focus-visible {
   position: relative;
   display: grid;
   place-items: center;
-
   overflow: hidden;
-
   color: rgba(255, 255, 255, 0.75);
-
   box-shadow:
     inset 0 0 0 1px rgba(255, 255, 255, 0.08),
     0 2px 6px rgba(0, 0, 0, 0.05);
-
   transition:
     transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 220ms cubic-bezier(0.22, 1, 0.36, 1),
@@ -576,17 +495,14 @@ input:focus-visible {
 
 .artwork::after {
   content: "";
-
   position: absolute;
   inset: 0;
-
   background:
     radial-gradient(
       circle at 30% 25%,
       rgba(255, 255, 255, 0.18),
       transparent 30%
     );
-
   pointer-events: none;
 }
 
@@ -598,40 +514,32 @@ input:focus-visible {
 
 .artwork-small {
   flex-shrink: 0;
-
   width: 44px;
   height: 44px;
-
   border-radius: 6px;
 }
 
 .artwork-medium {
   width: 64px;
   height: 64px;
-
   border-radius: 9px;
 }
 
 .artwork-large {
   aspect-ratio: 1;
-
   width: 100%;
-
   border-radius: 8px;
 }
 
 .album-info {
   display: flex;
   flex-direction: column;
-
   padding: 10px 2px 0;
 }
 
 .album-info strong {
   overflow: hidden;
-
   color: #353532;
-
   font-size: 11px;
   font-weight: 600;
   text-overflow: ellipsis;
@@ -640,11 +548,8 @@ input:focus-visible {
 
 .album-info span {
   margin-top: 4px;
-
   overflow: hidden;
-
   color: #96968f;
-
   font-size: 10px;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -656,7 +561,6 @@ input:focus-visible {
 
 .song-table {
   width: 100%;
-
   border-top: 1px solid var(--border);
 }
 
@@ -670,9 +574,7 @@ input:focus-visible {
 
 .table-header {
   height: 36px;
-
   color: #aaa9a3;
-
   font-size: 9px;
   font-weight: 600;
   letter-spacing: 0.04em;
@@ -681,9 +583,7 @@ input:focus-visible {
 .song-row {
   min-height: 55px;
   padding-top: 10px;
-
   border-top: 1px solid #eeeeeb;
-
   transition: background 100ms ease;
 }
 
@@ -698,13 +598,10 @@ input:focus-visible {
 .row-number {
   display: grid;
   place-items: center;
-
   width: 100%;
   height: 100%;
-
   color: #9a9a94;
   background: transparent;
-
   font-size: 10px;
 }
 
@@ -716,32 +613,24 @@ input:focus-visible {
   display: flex;
   align-items: center;
   gap: 12px;
-
   min-width: 0;
-
   padding: 6px 0;
-
   color: var(--text);
   background: transparent;
-
   text-align: left;
 }
 
 .song-title {
   display: flex;
   flex-direction: column;
-
   min-width: 0;
 }
 
 .song-title strong {
   overflow: hidden;
-
   color: #3c3c38;
-
   font-size: 13px;
   font-weight: 500;
-
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -752,24 +641,17 @@ input:focus-visible {
 
 .song-title span {
   overflow: hidden;
-
   margin-top: 4px;
-
   color: #999992;
-
   font-size: 10.5px;
-
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .song-album {
   overflow: hidden;
-
   color: #85857f;
-
   font-size: 10px;
-
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -778,19 +660,15 @@ input:focus-visible {
   display: flex;
   align-items: center;
   gap: 5px;
-
   color: #969690;
-
   font-size: 9px;
 }
 
 .row-menu {
   display: grid;
   place-items: center;
-
   width: 28px;
   height: 28px;
-
   color: #9a9a94;
   background: transparent;
   border-radius: 6px;
@@ -810,23 +688,18 @@ input:focus-visible {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   min-height: 220px;
-
   color: #999992;
 }
 
 .empty-state strong {
   margin-top: 12px;
-
   color: #555550;
-
   font-size: 12px;
 }
 
 .empty-state span {
   margin-top: 5px;
-
   font-size: 10px;
 }
 
@@ -842,11 +715,8 @@ input:focus-visible {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-
   margin-bottom: 34px;
-
   padding-bottom: 28px;
-
   border-bottom: 1px solid var(--border);
 }
 
@@ -854,18 +724,14 @@ input:focus-visible {
   display: flex;
   align-items: center;
   gap: 7px;
-
   height: 32px;
-
   padding: 0 10px;
-
   color: #666660;
   background: #efefec;
-
   border-radius: 7px;
-
   font-size: 10px;
 }
+
 /* ─────────────────────────────
    Queue
 ───────────────────────────── */
@@ -873,28 +739,19 @@ input:focus-visible {
 .queue-panel {
   position: fixed;
   z-index: 40;
-
   top: 65px;
   right: 18px;
   bottom: calc(var(--player-height) + 18px);
-
   width: 350px;
-
   display: flex;
   flex-direction: column;
-
   padding: 0;
-
   background: rgba(250, 250, 248, 0.98);
-
   border: 1px solid var(--border);
   border-radius: 14px;
-
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.14);
-
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-
   animation: donya-queue-in 180ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -903,6 +760,7 @@ input:focus-visible {
     opacity: 0;
     transform: translateY(6px) scale(0.99);
   }
+
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -913,17 +771,13 @@ input:focus-visible {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-
   flex-shrink: 0;
-
   padding: 18px 18px 15px;
-
   border-bottom: 1px solid var(--border);
 }
 
 .queue-header h3 {
   margin: 0;
-
   font-size: 15px;
   font-weight: 600;
   letter-spacing: -0.025em;
@@ -936,7 +790,6 @@ input:focus-visible {
 .queue-list {
   flex: 1;
   overflow-y: auto;
-
   padding: 8px 10px 14px;
 }
 
@@ -944,11 +797,8 @@ input:focus-visible {
   display: flex;
   align-items: center;
   gap: 7px;
-
   padding: 12px 6px 8px;
-
   color: #a0a09a;
-
   font-size: 9.5px;
   font-weight: 700;
   letter-spacing: 0.09em;
@@ -957,11 +807,9 @@ input:focus-visible {
 
 .queue-section-count {
   padding: 1px 6px;
-
   color: #9b9b95;
-  background: #ececE8;
+  background: #ecece8;
   border-radius: 99px;
-
   font-size: 9px;
   font-weight: 600;
 }
@@ -970,11 +818,8 @@ input:focus-visible {
   display: flex;
   align-items: center;
   gap: 8px;
-
   padding: 14px 8px;
-
   color: #a2a29c;
-
   font-size: 10.5px;
 }
 
@@ -983,18 +828,13 @@ input:focus-visible {
   grid-template-columns: 22px 38px minmax(0, 1fr) auto;
   align-items: center;
   gap: 10px;
-
   width: 100%;
   min-height: 52px;
-
   padding: 5px 8px;
-
   color: #888882;
   background: transparent;
   border-radius: 9px;
-
   text-align: left;
-
   transition: background 120ms ease;
 }
 
@@ -1025,12 +865,9 @@ input:focus-visible {
 
 .queue-track-info strong {
   overflow: hidden;
-
   color: #4a4a45;
-
   font-size: 11px;
   font-weight: 500;
-
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -1042,22 +879,16 @@ input:focus-visible {
 
 .queue-track-info span {
   overflow: hidden;
-
   margin-top: 3px;
-
   color: #9c9c96;
-
   font-size: 9.5px;
-
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .queue-duration {
   flex-shrink: 0;
-
   color: #a1a19b;
-
   font-size: 9px;
   font-variant-numeric: tabular-nums;
 }
@@ -1066,14 +897,12 @@ input:focus-visible {
   position: relative;
   display: grid;
   place-items: center;
-
   width: 100%;
   height: 100%;
 }
 
 .queue-index-number {
   color: #a0a09a;
-
   font-size: 10px;
   font-variant-numeric: tabular-nums;
 }
@@ -1086,7 +915,6 @@ input:focus-visible {
   display: none;
   align-items: center;
   justify-content: center;
-
   color: #33332f;
 }
 
@@ -1110,14 +938,12 @@ input:focus-visible {
   display: flex;
   align-items: flex-end;
   gap: 2.5px;
-
   height: 13px;
 }
 
 .equalizer span {
   width: 2.5px;
   height: 30%;
-
   background: #33332f;
   border-radius: 1px;
 }
@@ -1143,6 +969,7 @@ input:focus-visible {
   100% {
     height: 30%;
   }
+
   50% {
     height: 100%;
   }
@@ -1155,22 +982,16 @@ input:focus-visible {
 .player {
   position: fixed;
   z-index: 30;
-
   left: 0;
   right: 0;
   bottom: 0;
-
   display: grid;
   grid-template-columns: 1fr 1.4fr 1fr;
   align-items: center;
-
   height: var(--player-height);
-
   padding: 0 20px;
-
   background: rgba(249, 249, 247, 0.96);
   border-top: 1px solid var(--border);
-
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
 }
@@ -1178,40 +999,30 @@ input:focus-visible {
 .player-track {
   display: flex;
   align-items: center;
-
   min-width: 0;
 }
 
 .now-playing {
   display: flex;
   flex-direction: column;
-
   min-width: 0;
-
   margin-left: 10px;
 }
 
 .now-playing strong {
   overflow: hidden;
-
   color: #33332f;
-
   font-size: 10px;
   font-weight: 600;
-
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .now-playing span {
   overflow: hidden;
-
   margin-top: 4px;
-
   color: #999992;
-
   font-size: 9px;
-
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -1219,9 +1030,7 @@ input:focus-visible {
 .player-like {
   display: grid;
   place-items: center;
-
   margin-left: 12px;
-
   color: #9a9a94;
   background: transparent;
 }
@@ -1241,21 +1050,17 @@ input:focus-visible {
   align-items: center;
   justify-content: center;
   gap: 8px;
-
   height: 32px;
 }
 
 .control-button {
   display: grid;
   place-items: center;
-
   width: 29px;
   height: 29px;
-
   color: #85857f;
   background: transparent;
   border-radius: 6px;
-
   transition:
     background 100ms ease,
     color 100ms ease;
@@ -1273,13 +1078,10 @@ input:focus-visible {
 .play-button {
   display: grid;
   place-items: center;
-
   width: 32px;
   height: 32px;
-
   color: white;
   background: #292927;
-
   border-radius: 50%;
 }
 
@@ -1291,15 +1093,12 @@ input:focus-visible {
   display: flex;
   align-items: center;
   gap: 8px;
-
   margin-top: 3px;
 }
 
 .progress-row span {
   width: 26px;
-
   color: #a0a099;
-
   font-size: 8px;
   text-align: center;
 }
@@ -1307,14 +1106,10 @@ input:focus-visible {
 .progress,
 .volume-slider {
   appearance: none;
-
   width: 100%;
   height: 3px;
-
   background: #deded9;
-
   border-radius: 99px;
-
   outline: none;
 }
 
@@ -1337,12 +1132,9 @@ input:focus-visible {
 .progress::-webkit-slider-thumb,
 .volume-slider::-webkit-slider-thumb {
   appearance: none;
-
   width: 7px;
   height: 7px;
-
   background: #555550;
-
   border-radius: 50%;
 }
 
@@ -1350,9 +1142,7 @@ input:focus-visible {
 .volume-slider::-moz-range-thumb {
   width: 7px;
   height: 7px;
-
   background: #555550;
-
   border: 0;
   border-radius: 50%;
 }
@@ -1361,7 +1151,6 @@ input:focus-visible {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-
   gap: 8px;
 }
 
@@ -1369,7 +1158,6 @@ input:focus-visible {
   display: flex;
   align-items: center;
   gap: 2px;
-
   width: 110px;
 }
 
@@ -1427,23 +1215,18 @@ input:focus-visible {
 .empty-library-icon {
   width: 64px;
   height: 64px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   margin-bottom: 24px;
-
   border: 1px solid var(--border);
   border-radius: 16px;
-
   background: var(--surface);
   color: var(--text-secondary);
 }
 
 .empty-library h1 {
   margin: 10px 0 10px;
-
   font-size: 32px;
   font-weight: 600;
   letter-spacing: -0.04em;
@@ -1452,7 +1235,6 @@ input:focus-visible {
 .empty-library p {
   max-width: 420px;
   margin: 0;
-
   color: var(--text-secondary);
   line-height: 1.6;
 }
@@ -1461,22 +1243,16 @@ input:focus-visible {
   display: inline-flex;
   align-items: center;
   gap: 9px;
-
   margin-top: 28px;
   padding: 11px 17px;
-
   border: 0;
   border-radius: 9px;
-
   background: var(--text);
   color: var(--background);
-
   font: inherit;
   font-size: 13px;
   font-weight: 600;
-
   cursor: pointer;
-
   transition:
     transform 120ms ease,
     opacity 120ms ease;
@@ -1493,30 +1269,24 @@ input:focus-visible {
 
 .supported-formats {
   margin-top: 16px;
-
   font-size: 11px;
   letter-spacing: 0.04em;
-
   color: var(--text-muted);
 }
 
 .library-error {
   margin-top: 20px;
   padding: 10px 14px;
-
   max-width: 500px;
-
   border: 1px solid var(--border);
   border-radius: 8px;
-
   background: var(--surface);
   color: #c75c5c;
-
   font-size: 12px;
 }
 
 /* ─────────────────────────────
-   Context menu (row menu dropdown)
+   Context menu
 ───────────────────────────── */
 
 .row-menu-wrapper {
@@ -1528,14 +1298,11 @@ input:focus-visible {
   z-index: 40;
   right: 0;
   top: 32px;
-
   min-width: 190px;
   padding: 4px;
-
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 9px;
-
   box-shadow: 0 14px 32px rgba(0, 0, 0, 0.14);
 }
 
@@ -1543,16 +1310,12 @@ input:focus-visible {
   display: flex;
   align-items: center;
   gap: 9px;
-
   width: 100%;
   height: 33px;
-
   padding: 0 10px;
-
   color: #5c5c56;
   background: transparent;
   border-radius: 6px;
-
   font-size: 11px;
   font-weight: 500;
   text-align: left;
@@ -1566,28 +1329,22 @@ input:focus-visible {
 /* ─────────────────────────────
    Album / Artist detail
 ───────────────────────────── */
+
 .back-button {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-
   height: 34px;
   padding: 0 14px 0 10px;
-
   margin-bottom: 26px;
-
   color: #5c5c56;
   background: var(--surface);
-
   border: 1px solid var(--border);
   border-radius: 99px;
-
   font-size: 11.5px;
   font-weight: 600;
   letter-spacing: -0.01em;
-
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
-
   transition:
     color 150ms ease,
     background 150ms ease,
@@ -1598,7 +1355,6 @@ input:focus-visible {
 .back-button-icon {
   display: grid;
   place-items: center;
-
   transition: transform 150ms ease;
 }
 
@@ -1748,18 +1504,13 @@ input:focus-visible {
 .player-track-info {
   display: flex;
   align-items: center;
-
   min-width: 0;
   flex: 1;
-
   padding: 6px 10px 6px 6px;
   margin: -6px 0 -6px -6px;
-
   background: transparent;
   border-radius: 10px;
-
   text-align: left;
-
   transition: background 120ms ease;
 }
 
@@ -1772,17 +1523,16 @@ input:focus-visible {
 }
 
 /* ─────────────────────────────
-   Now Playing (full-screen focus view)
+   Now Playing
 ───────────────────────────── */
 
 .now-playing-view {
   position: fixed;
   inset: 0;
   z-index: 35;
-
   display: flex;
   overflow: hidden;
-
+  min-height: 0;
   animation: donya-now-playing-in 220ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -1791,6 +1541,7 @@ input:focus-visible {
     opacity: 0;
     transform: scale(0.98);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -1800,10 +1551,8 @@ input:focus-visible {
 .now-playing-backdrop {
   position: absolute;
   inset: -60px;
-
   background-size: cover;
   background-position: center;
-
   filter: blur(60px) saturate(1.35) brightness(0.55);
   transform: scale(1.08);
 }
@@ -1811,7 +1560,6 @@ input:focus-visible {
 .now-playing-scrim {
   position: absolute;
   inset: 0;
-
   background: linear-gradient(
     180deg,
     rgba(10, 10, 10, 0.55) 0%,
@@ -1823,15 +1571,12 @@ input:focus-visible {
 .now-playing-content {
   position: relative;
   z-index: 1;
-
   display: flex;
   flex-direction: column;
-
   width: 100%;
   height: 100%;
-
-  padding: 24px 36px 40px;
-
+  min-height: 0;
+  padding: 24px 36px 32px;
   color: #fff;
 }
 
@@ -1839,13 +1584,11 @@ input:focus-visible {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   flex-shrink: 0;
 }
 
 .now-playing-kicker {
   color: rgba(255, 255, 255, 0.6);
-
   font-size: 10.5px;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -1867,65 +1610,82 @@ input:focus-visible {
   background: rgba(255, 255, 255, 0.22);
 }
 
+/*
+ * Main Now Playing layout
+ *
+ * The body is allowed to shrink instead of forcing its children
+ * outside the viewport. The artwork uses both viewport width and
+ * viewport height so short windows remain usable.
+ */
+
 .now-playing-body {
   display: flex;
-  flex: 1;
+  flex: 1 1 auto;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 26px;
-
+  gap: clamp(12px, 3vh, 26px);
   width: 100%;
   max-width: 640px;
-
+  min-height: 0;
   margin: 0 auto;
+  padding: 12px 0;
+  overflow: hidden;
 }
 
 .now-playing-artwork {
-  width: min(380px, 58vw);
+  flex: 0 1 auto;
+  width: min(380px, 58vw, 42vh);
+  max-width: 380px;
+  max-height: 42vh;
+  aspect-ratio: 1;
+  min-width: 0;
+  min-height: 0;
 }
 
 .now-playing-artwork .artwork {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
   box-shadow:
     0 30px 80px rgba(0, 0, 0, 0.5),
     inset 0 0 0 1px rgba(255, 255, 255, 0.08);
 }
 
 .now-playing-meta {
+  flex: 0 1 auto;
+  width: 100%;
   max-width: 100%;
+  min-width: 0;
   text-align: center;
 }
 
 .now-playing-meta h1 {
   overflow: hidden;
-
   margin: 0;
-
   color: #fff;
-
-  font-size: 26px;
+  font-size: clamp(19px, 2.2vw, 26px);
+  line-height: 1.15;
   font-weight: 700;
   letter-spacing: -0.03em;
-
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .now-playing-meta p {
   overflow: hidden;
-
   margin: 8px 0 0;
-
   color: rgba(255, 255, 255, 0.6);
-
   font-size: 13px;
-
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .now-playing-progress {
+  flex: 0 0 auto;
   width: 100%;
+  min-width: 0;
 }
 
 .now-playing-view .progress {
@@ -1947,19 +1707,17 @@ input:focus-visible {
 .now-playing-times {
   display: flex;
   justify-content: space-between;
-
   margin-top: 8px;
-
   color: rgba(255, 255, 255, 0.55);
-
   font-size: 10px;
 }
 
 .now-playing-controls {
   display: flex;
+  flex: 0 0 auto;
   align-items: center;
   justify-content: center;
-  gap: 18px;
+  gap: clamp(10px, 2vw, 18px);
 }
 
 .now-playing-view .control-button {
@@ -1983,7 +1741,6 @@ input:focus-visible {
 .play-button.large {
   width: 64px;
   height: 64px;
-
   color: #111;
   background: #fff;
 }
@@ -1994,12 +1751,13 @@ input:focus-visible {
 
 .now-playing-secondary {
   display: flex;
+  flex: 0 0 auto;
   align-items: center;
   justify-content: center;
-  gap: 26px;
-
+  gap: clamp(14px, 3vw, 26px);
   width: 100%;
-  margin-top: 4px;
+  min-height: 32px;
+  margin-top: 0;
 }
 
 .now-playing-view .volume-slider {
@@ -2018,17 +1776,188 @@ input:focus-visible {
   background: #fff;
 }
 
-@media (max-width: 680px) {
+/*
+ * Medium-height windows
+ */
+
+@media (max-height: 760px) and (min-width: 681px) {
   .now-playing-content {
-    padding: 18px 20px 28px;
+    padding-top: 16px;
+    padding-bottom: 20px;
   }
 
-  .now-playing-controls {
+  .now-playing-body {
     gap: 12px;
+    padding: 8px 0;
+  }
+
+  .now-playing-artwork {
+    width: min(300px, 36vh);
+    max-height: 36vh;
+  }
+
+  .now-playing-meta p {
+    margin-top: 5px;
+  }
+
+  .now-playing-times {
+    margin-top: 5px;
   }
 
   .now-playing-secondary {
-    gap: 18px;
+    min-height: 28px;
+  }
+}
+
+/*
+ * Short windows
+ *
+ * This is the important fallback for small-height desktop windows.
+ * Everything gets compressed before any element can disappear below
+ * the viewport.
+ */
+
+@media (max-height: 620px) {
+  .now-playing-content {
+    padding: 12px 24px 14px;
+  }
+
+  .now-playing-body {
+    gap: 8px;
+    padding: 5px 0;
+  }
+
+  .now-playing-artwork {
+    width: min(230px, 30vh);
+    max-height: 30vh;
+  }
+
+  .now-playing-meta h1 {
+    font-size: 18px;
+  }
+
+  .now-playing-meta p {
+    margin-top: 3px;
+    font-size: 11px;
+  }
+
+  .now-playing-times {
+    margin-top: 4px;
+    font-size: 9px;
+  }
+
+  .now-playing-controls {
+    gap: 8px;
+  }
+
+  .control-button.large {
+    width: 38px;
+    height: 38px;
+  }
+
+  .play-button.large {
+    width: 52px;
+    height: 52px;
+  }
+
+  .now-playing-secondary {
+    gap: 14px;
+    min-height: 26px;
+  }
+}
+
+/* ─────────────────────────────
+   Now Playing — Mobile
+───────────────────────────── */
+
+@media (max-width: 680px) {
+  .now-playing-content {
+    padding: 14px 18px 18px;
+  }
+
+  .now-playing-body {
+    gap: clamp(8px, 2vh, 16px);
+    padding: 8px 0;
+  }
+
+  .now-playing-artwork {
+    width: min(300px, 70vw, 38vh);
+    max-height: 38vh;
+  }
+
+  .now-playing-meta h1 {
+    font-size: clamp(18px, 6vw, 23px);
+  }
+
+  .now-playing-meta p {
+    margin-top: 5px;
+    font-size: 11px;
+  }
+
+  .now-playing-controls {
+    gap: 8px;
+  }
+
+  .control-button.large {
+    width: 42px;
+    height: 42px;
+  }
+
+  .play-button.large {
+    width: 56px;
+    height: 56px;
+  }
+
+  .now-playing-secondary {
+    gap: 14px;
+  }
+}
+
+/*
+ * Very short mobile windows
+ */
+
+@media (max-width: 680px) and (max-height: 620px) {
+  .now-playing-content {
+    padding: 10px 14px 12px;
+  }
+
+  .now-playing-body {
+    gap: 6px;
+    padding: 4px 0;
+  }
+
+  .now-playing-artwork {
+    width: min(210px, 28vh);
+    max-height: 28vh;
+  }
+
+  .now-playing-meta h1 {
+    font-size: 17px;
+  }
+
+  .now-playing-meta p {
+    margin-top: 2px;
+    font-size: 10px;
+  }
+
+  .now-playing-times {
+    margin-top: 3px;
+    font-size: 8px;
+  }
+
+  .control-button.large {
+    width: 36px;
+    height: 36px;
+  }
+
+  .play-button.large {
+    width: 48px;
+    height: 48px;
+  }
+
+  .now-playing-secondary {
+    gap: 10px;
   }
 }
 
@@ -2044,7 +1973,6 @@ input:focus-visible {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
-
   margin-bottom: 36px;
 }
 
@@ -2052,9 +1980,7 @@ input:focus-visible {
   display: flex;
   flex-direction: column;
   gap: 6px;
-
   padding: 16px 18px;
-
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 12px;
@@ -2062,7 +1988,6 @@ input:focus-visible {
 
 .stat-value {
   color: var(--text);
-
   font-size: 22px;
   font-weight: 700;
   letter-spacing: -0.03em;
@@ -2070,7 +1995,6 @@ input:focus-visible {
 
 .stat-label {
   color: var(--text-muted);
-
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.06em;
@@ -2086,15 +2010,12 @@ input:focus-visible {
   align-items: flex-end;
   justify-content: space-between;
   gap: 16px;
-
   margin-bottom: 16px;
 }
 
 .settings-section-header h2 {
   margin: 0;
-
   color: var(--text);
-
   font-size: 15px;
   font-weight: 600;
   letter-spacing: -0.02em;
@@ -2102,9 +2023,7 @@ input:focus-visible {
 
 .settings-section-header p {
   margin: 5px 0 0;
-
   color: var(--text-muted);
-
   font-size: 11px;
 }
 
@@ -2118,9 +2037,7 @@ input:focus-visible {
 .primary-button.compact {
   margin-top: 0;
   padding: 8px 14px;
-
   border-radius: 8px;
-
   font-size: 11.5px;
 }
 
@@ -2134,21 +2051,16 @@ input:focus-visible {
   flex-direction: column;
   align-items: center;
   gap: 8px;
-
   padding: 40px 20px;
-
   color: var(--text-muted);
   background: var(--surface);
-
   border: 1px dashed var(--border-strong);
   border-radius: 12px;
-
   text-align: center;
 }
 
 .settings-empty strong {
   color: var(--text-secondary);
-
   font-size: 12.5px;
   font-weight: 600;
 }
@@ -2168,13 +2080,10 @@ input:focus-visible {
   display: flex;
   align-items: center;
   gap: 13px;
-
   padding: 12px 14px;
-
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 11px;
-
   transition:
     border-color 120ms ease,
     box-shadow 120ms ease;
@@ -2190,10 +2099,8 @@ input:focus-visible {
   display: grid;
   flex-shrink: 0;
   place-items: center;
-
   width: 36px;
   height: 36px;
-
   color: #6f6f68;
   background: #f0f0ed;
   border-radius: 9px;
@@ -2208,25 +2115,18 @@ input:focus-visible {
 
 .source-info strong {
   overflow: hidden;
-
   color: var(--text);
-
   font-size: 12.5px;
   font-weight: 600;
-
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .source-info span {
   overflow: hidden;
-
   margin-top: 3px;
-
   color: var(--text-muted);
-
   font-size: 10.5px;
-
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -2239,7 +2139,6 @@ input:focus-visible {
 
 .source-count {
   color: var(--text-muted);
-
   font-size: 10.5px;
   font-weight: 500;
   white-space: nowrap;
@@ -2249,9 +2148,7 @@ input:focus-visible {
   display: flex;
   align-items: center;
   gap: 5px;
-
   color: #7a7a74;
-
   font-size: 10.5px;
   font-weight: 500;
   white-space: nowrap;
@@ -2274,19 +2171,14 @@ input:focus-visible {
   flex-shrink: 0;
   align-items: center;
   gap: 6px;
-
   height: 30px;
   padding: 0 12px;
-
   color: #b5544f;
   background: #f7eceb;
-
   border: 1px solid #eeddda;
   border-radius: 7px;
-
   font-size: 10.5px;
   font-weight: 600;
-
   transition:
     background 120ms ease,
     color 120ms ease;
@@ -2307,9 +2199,7 @@ input:focus-visible {
   flex-shrink: 0;
   align-items: center;
   gap: 8px;
-
   color: var(--text-muted);
-
   font-size: 10.5px;
 }
 
@@ -2321,6 +2211,7 @@ input:focus-visible {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

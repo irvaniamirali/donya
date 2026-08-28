@@ -107,8 +107,6 @@ export function NowPlaying({
             <ChevronDown size={20} />
           </button>
 
-          <span className="now-playing-kicker">Now Playing</span>
-
           <button
             className={`icon-button now-playing-queue-toggle ${
               queueOpen ? "active" : ""
