@@ -419,8 +419,8 @@ input:focus-visible {
 }
 
 .hero-play:hover {
-  background: #151514;
-  transform: translateY(-1px);
+  background: #111110;
+  transform: none;
 }
 
 /* ─────────────────────────────
@@ -509,9 +509,11 @@ input:focus-visible {
 }
 
 .album-card:hover .artwork {
-  transform: scale(1.025);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.14);
-  filter: brightness(0.97);
+  transform: none;
+  filter: brightness(0.985);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .artwork-small {
@@ -1400,7 +1402,8 @@ input:focus-visible {
 }
 
 .primary-button:hover {
-  transform: translateY(-1px);
+  transform: none;
+  opacity: 0.92;
 }
 
 .primary-button:disabled {
@@ -2411,3 +2414,16 @@ input:focus-visible {
 ::-webkit-scrollbar-thumb:hover {
   background: #c4c4be;
 }
+
+
+
+
+/* .hero-play:hover {
+  background: #111;
+  transform: none;
+}
+
+.primary-button:hover {
+  transform: none;
+  opacity: .92;
+} */
