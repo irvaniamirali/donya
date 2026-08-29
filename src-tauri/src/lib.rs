@@ -88,8 +88,6 @@ fn scan_music_library(path: String) -> Result<Vec<Track>, String> {
             continue;
         }
 
-        println!("Scanning: {}", path.display());
-
         match read_track(path) {
             Ok(track) => {
                 tracks.push(track);
@@ -118,11 +116,6 @@ fn scan_music_library(path: String) -> Result<Vec<Track>, String> {
             .to_lowercase()
             .cmp(&b.title.to_lowercase())
     });
-
-    println!(
-        "Music scan completed: {} tracks found",
-        tracks.len()
-    );
 
     Ok(tracks)
 }
@@ -204,16 +197,6 @@ fn read_track(path: &Path) -> Result<Track, String> {
             encoded
         ))
     });
-
-    println!(
-        "[Donya] artwork: {} -> {}",
-        path.display(),
-        if artwork.is_some() {
-            "FOUND"
-        } else {
-            "NOT FOUND"
-        }
-    );
 
     let title = tag
         .and_then(|tag| tag.title())
