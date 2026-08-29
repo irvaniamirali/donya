@@ -29,7 +29,13 @@ type UseAudioPlayerResult = {
   shuffle: boolean;
   repeat: PlayerRepeatMode;
 
-  playTrack: (track: Track) => Promise<void>;
+  queue: Track[];
+
+  playTrack: (
+    track: Track,
+    queue?: Track[],
+  ) => Promise<void>;
+
   togglePlaying: () => Promise<void>;
 
   next: () => Promise<void>;
@@ -43,6 +49,45 @@ type UseAudioPlayerResult = {
   toggleShuffle: () => void;
   toggleRepeat: () => void;
 };
+
+function shuffleTracks(
+  tracks: Track[],
+  currentTrackId: string | null,
+): Track[] {
+  if (tracks.length <= 1) {
+    return [...tracks];
+  }
+
+  const currentIndex = currentTrackId
+    ? tracks.findIndex(
+        (track) => track.id === currentTrackId,
+      )
+    : -1;
+
+  const current =
+    currentIndex >= 0
+      ? tracks[currentIndex]
+      : null;
+
+  const remaining = tracks.filter(
+    (track) => track.id !== currentTrackId,
+  );
+
+  for (let index = remaining.length - 1; index > 0; index -= 1) {
+    const randomIndex = Math.floor(
+      Math.random() * (index + 1),
+    );
+
+    [remaining[index], remaining[randomIndex]] = [
+      remaining[randomIndex],
+      remaining[index],
+    ];
+  }
+
+  return current
+    ? [current, ...remaining]
+    : remaining;
+}
 
 export function useAudioPlayer({
   tracks,
@@ -74,9 +119,9 @@ export function useAudioPlayer({
   const [repeat, setRepeat] =
     useState<PlayerRepeatMode>("off");
 
-  /*
-   * Create one HTMLAudioElement for the whole application.
-   */
+  const [queue, setQueue] =
+    useState<Track[]>([]);
+
   useEffect(() => {
     const audio = new Audio();
 
@@ -211,14 +256,35 @@ export function useAudioPlayer({
     };
   }, []);
 
+  useEffect(() => {
+    if (currentTrack && queue.length === 0) {
+      setQueue(tracks);
+      return;
+    }
+
+    if (queue.length === 0) {
+      return;
+    }
+
+    const availableIds = new Set(
+      tracks.map((track) => track.id),
+    );
+
+    setQueue((current) => {
+      const filtered = current.filter((track) =>
+        availableIds.has(track.id),
+      );
+
+      if (filtered.length === current.length) {
+        return current;
+      }
+
+      return filtered;
+    });
+  }, [tracks, currentTrack, queue.length]);
+
   const getAudioUrl = useCallback(
     (track: Track) => {
-      /*
-       * Tauri 2 asset protocol.
-       *
-       * Do NOT manually encode the path.
-       * convertFileSrc handles the filesystem path.
-       */
       const url = convertFileSrc(
         track.path,
       );
@@ -238,7 +304,10 @@ export function useAudioPlayer({
   );
 
   const playTrack = useCallback(
-    async (track: Track) => {
+    async (
+      track: Track,
+      nextQueue?: Track[],
+    ) => {
       const audio =
         audioRef.current;
 
@@ -250,31 +319,45 @@ export function useAudioPlayer({
         getAudioUrl(track);
 
       const isSameTrack =
-        currentTrack?.id ===
-        track.id;
+        currentTrack?.id === track.id;
+
+      if (nextQueue && nextQueue.length > 0) {
+        setQueue((currentQueue) => {
+          const isSameQueue =
+            currentQueue.length ===
+              nextQueue.length &&
+            currentQueue.every(
+              (item, index) =>
+                item.id ===
+                nextQueue[index]?.id,
+            );
+
+          if (isSameQueue) {
+            return currentQueue;
+          }
+
+          return shuffle
+            ? shuffleTracks(
+                nextQueue,
+                track.id,
+              )
+            : [...nextQueue];
+        });
+      } else if (queue.length === 0) {
+        setQueue([track]);
+      }
 
       if (!isSameTrack) {
         audio.pause();
 
-        /*
-         * Clear previous source first.
-         */
         audio.removeAttribute("src");
-
         audio.load();
 
         setCurrentTrack(track);
         setCurrentTime(0);
         setDuration(0);
 
-        /*
-         * Set new Tauri asset URL.
-         */
         audio.src = source;
-
-        /*
-         * Start loading the new audio.
-         */
         audio.load();
       }
 
@@ -299,6 +382,8 @@ export function useAudioPlayer({
     [
       currentTrack?.id,
       getAudioUrl,
+      queue.length,
+      shuffle,
     ],
   );
 
@@ -332,66 +417,37 @@ export function useAudioPlayer({
     useCallback(() => {
       if (
         !currentTrack ||
-        tracks.length === 0
+        queue.length === 0
       ) {
         return -1;
       }
 
       const currentIndex =
-        tracks.findIndex(
+        queue.findIndex(
           (track) =>
             track.id ===
             currentTrack.id,
         );
 
       if (currentIndex === -1) {
-        return 0;
-      }
-
-      if (
-        shuffle &&
-        tracks.length > 1
-      ) {
-        const candidates =
-          tracks
-            .map(
-              (_, index) =>
-                index,
-            )
-            .filter(
-              (index) =>
-                index !==
-                currentIndex,
-            );
-
-        return candidates[
-          Math.floor(
-            Math.random() *
-              candidates.length,
-          )
-        ];
+        return -1;
       }
 
       const nextIndex =
         currentIndex + 1;
 
       if (
-        nextIndex >=
-          tracks.length &&
+        nextIndex >= queue.length &&
         repeat !== "all"
       ) {
         return -1;
       }
 
-      return (
-        nextIndex %
-        tracks.length
-      );
+      return nextIndex % queue.length;
     }, [
       currentTrack,
+      queue,
       repeat,
-      shuffle,
-      tracks,
     ]);
 
   const next =
@@ -404,7 +460,7 @@ export function useAudioPlayer({
       }
 
       const track =
-        tracks[index];
+        queue[index];
 
       if (track) {
         await playTrack(track);
@@ -412,7 +468,7 @@ export function useAudioPlayer({
     }, [
       getNextIndex,
       playTrack,
-      tracks,
+      queue,
     ]);
 
   const previous =
@@ -429,8 +485,12 @@ export function useAudioPlayer({
         return;
       }
 
+      if (queue.length === 0) {
+        return;
+      }
+
       const currentIndex =
-        tracks.findIndex(
+        queue.findIndex(
           (track) =>
             track.id ===
             currentTrack.id,
@@ -444,11 +504,11 @@ export function useAudioPlayer({
         (
           currentIndex -
           1 +
-          tracks.length
-        ) % tracks.length;
+          queue.length
+        ) % queue.length;
 
       const previousTrack =
-        tracks[previousIndex];
+        queue[previousIndex];
 
       if (previousTrack) {
         await playTrack(
@@ -458,7 +518,7 @@ export function useAudioPlayer({
     }, [
       currentTrack,
       playTrack,
-      tracks,
+      queue,
     ]);
 
   const seek =
@@ -551,10 +611,61 @@ export function useAudioPlayer({
 
   const toggleShuffle =
     useCallback(() => {
-      setShuffle(
-        (value) => !value,
-      );
-    }, []);
+      setShuffle((enabled) => {
+        const nextEnabled = !enabled;
+
+        if (queue.length <= 1) {
+          return nextEnabled;
+        }
+
+        if (nextEnabled) {
+          setQueue(
+            shuffleTracks(
+              queue,
+              currentTrack?.id ?? null,
+            ),
+          );
+        } else {
+          const currentId =
+            currentTrack?.id;
+
+          const restoredQueue =
+            currentId
+              ? tracks.filter(
+                  (track) =>
+                    tracks.some(
+                      (item) =>
+                        item.id ===
+                        track.id,
+                    ),
+                )
+              : [...tracks];
+
+          setQueue(
+            currentId
+              ? [
+                  ...restoredQueue.filter(
+                    (track) =>
+                      track.id ===
+                      currentId,
+                  ),
+                  ...restoredQueue.filter(
+                    (track) =>
+                      track.id !==
+                      currentId,
+                  ),
+                ]
+              : restoredQueue,
+          );
+        }
+
+        return nextEnabled;
+      });
+    }, [
+      currentTrack?.id,
+      queue,
+      tracks,
+    ]);
 
   const toggleRepeat =
     useCallback(() => {
@@ -571,9 +682,6 @@ export function useAudioPlayer({
       });
     }, []);
 
-  /*
-   * One single ended handler.
-   */
   useEffect(() => {
     const audio =
       audioRef.current;
@@ -629,6 +737,8 @@ export function useAudioPlayer({
 
     shuffle,
     repeat,
+
+    queue,
 
     playTrack,
     togglePlaying,

@@ -36,9 +36,7 @@ function App() {
   const [selectedArtistName, setSelectedArtistName] =
     useState<string | null>(null);
 
-  const [queueContext, setQueueContext] = useState<Track[]>(
-    [],
-  );
+  const [queueContext, setQueueContext] = useState<Track[]>([]);
 
   const {
     tracks,
@@ -78,9 +76,11 @@ function App() {
   }, [tracks, search]);
 
   const albums = useMemo(() => groupAlbums(tracks), [tracks]);
-  const artists = useMemo(() => groupArtists(tracks), [
-    tracks,
-  ]);
+
+  const artists = useMemo(
+    () => groupArtists(tracks),
+    [tracks],
+  );
 
   const filteredAlbums = useMemo(() => {
     const query = search.trim().toLowerCase();
@@ -120,7 +120,7 @@ function App() {
     list: Track[],
   ) => {
     setQueueContext(list);
-    player.playTrack(track);
+    void player.playTrack(track, list);
   };
 
   const handleGoToAlbum = (track: Track) => {
@@ -142,11 +142,14 @@ function App() {
     : false;
 
   const queueTracks =
-    queueContext.length > 0 ? queueContext : tracks;
+    player.queue.length > 0
+      ? player.queue
+      : queueContext.length > 0
+        ? queueContext
+        : tracks;
 
-  // Settings must stay reachable even with an empty library,
-  // so it's the only page exempt from the empty-state screen.
-  const showEmptyState = tracks.length === 0 && page !== "Settings";
+  const showEmptyState =
+    tracks.length === 0 && page !== "Settings";
 
   return (
     <div className="app-shell">

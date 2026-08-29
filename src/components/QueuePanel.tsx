@@ -67,7 +67,9 @@ export function QueuePanel({
             <QueueRow
               track={currentTrack}
               index={
-                currentIndex === -1 ? 1 : currentIndex + 1
+                currentIndex === -1
+                  ? 1
+                  : currentIndex + 1
               }
               isCurrent
               playing={playing}
@@ -87,7 +89,10 @@ export function QueuePanel({
 
         {nextUp.length === 0 ? (
           <div className="queue-empty">
-            <Music2 size={15} strokeWidth={1.7} />
+            <Music2
+              size={15}
+              strokeWidth={1.7}
+            />
             That's the last song in this list.
           </div>
         ) : (
@@ -128,24 +133,34 @@ function QueueRow({
       onClick={() => onPlay(track)}
     >
       <span className="queue-index">
-        <span className="queue-index-number">{index}</span>
+        <span className="queue-index-number">
+          {index}
+        </span>
 
         <span className="queue-index-action">
           {isCurrent ? (
             <EqualizerBars playing={playing} />
           ) : (
-            <Play size={12} fill="currentColor" />
+            <Play
+              size={12}
+              fill="currentColor"
+            />
           )}
         </span>
       </span>
 
       <span className="queue-artwork">
-        <Artwork artwork={track.artwork} size="small" />
+        <Artwork
+          artwork={track.artwork}
+          size="small"
+        />
       </span>
 
       <span className="queue-track-info">
         <strong>{track.title}</strong>
-        <span>{track.artist ?? "Unknown artist"}</span>
+        <span>
+          {track.artist ?? "Unknown artist"}
+        </span>
       </span>
 
       <span className="queue-duration">
@@ -155,10 +170,16 @@ function QueueRow({
   );
 }
 
-function EqualizerBars({ playing }: { playing: boolean }) {
+function EqualizerBars({
+  playing,
+}: {
+  playing: boolean;
+}) {
   return (
     <span
-      className={`equalizer ${playing ? "is-playing" : ""}`}
+      className={`equalizer ${
+        playing ? "is-playing" : ""
+      }`}
       aria-hidden="true"
     >
       <span />
@@ -169,8 +190,13 @@ function EqualizerBars({ playing }: { playing: boolean }) {
 }
 
 function formatDuration(durationMs: number) {
-  const seconds = Math.floor(durationMs / 1000);
-  const minutes = Math.floor(seconds / 60);
+  const seconds = Math.floor(
+    durationMs / 1000,
+  );
+
+  const minutes = Math.floor(
+    seconds / 60,
+  );
 
   return `${minutes}:${(seconds % 60)
     .toString()
