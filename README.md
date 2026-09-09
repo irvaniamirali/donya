@@ -5,16 +5,16 @@ Donya is a desktop music player for browsing and playing a local music library f
 ## Screenshots
 
 ### Home
-![Home](docs/screenshots/home.png)
+![Home](screenshots/home.png)
 
 ### Albums
-![Albums](docs/screenshots/albums.png)
+![Albums](screenshots/albums.png)
 
-### Artists
-![Artists](docs/screenshots/artists.png)
+### Player
+![Player](screenshots/player.png)
 
 ### Settings
-![Settings](docs/screenshots/settings.png)
+![Settings](screenshots/settings.png)
 
 ## Features
 
