@@ -38,8 +38,8 @@ export function Home({
       <section className="hero">
         <div>
           <span className="eyebrow">YOUR LIBRARY</span>
-          <h1>Good evening.</h1>
-          <p>Your local music, organized your way.</p>
+          <h1>Your music, your way.</h1>
+          <p>Everything you listen to, right here.</p>
         </div>
 
         {currentTrack && (
@@ -61,7 +61,7 @@ export function Home({
         <div className="section-title-row">
           <div>
             <h2>Recently added</h2>
-            <p>Music in your local library</p>
+            <p>The latest additions to your library</p>
           </div>
 
           <span className="text-button">

@@ -51,10 +51,10 @@ export function EmptyLibrary({
             : "Choose music folder"}
         </button>
 
-        <span className="supported-formats">
+        {/* <span className="supported-formats">
           FLAC · MP3 · M4A · AAC · WAV ·
           OGG · OPUS
-        </span>
+        </span> */}
 
         {error && (
           <div className="library-error">

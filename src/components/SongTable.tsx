@@ -6,6 +6,7 @@ import {
   Clock3,
   Heart,
   MoreHorizontal,
+  Music2,
   UserRound,
 } from "lucide-react";
 
@@ -21,6 +22,7 @@ type SongTableProps = {
 
   isFavorite: (trackId: string) => boolean;
   onToggleFavorite: (trackId: string) => void;
+  onAddTrackToPlaylist?: (track: Track) => void;
 
   onGoToAlbum: (track: Track) => void;
   onGoToArtist: (track: Track) => void;
@@ -33,6 +35,7 @@ export function SongTable({
   onPlay,
   isFavorite,
   onToggleFavorite,
+  onAddTrackToPlaylist,
   onGoToAlbum,
   onGoToArtist,
 }: SongTableProps) {
@@ -157,6 +160,18 @@ export function SongTable({
                       ? "Remove from Favorites"
                       : "Add to Favorites"}
                   </button>
+
+                  {onAddTrackToPlaylist && (
+                    <button
+                      onClick={() => {
+                        onAddTrackToPlaylist(track);
+                        setOpenMenuId(null);
+                      }}
+                    >
+                      <Music2 size={14} />
+                      Add to Playlist
+                    </button>
+                  )}
 
                   <button
                     onClick={() => {
