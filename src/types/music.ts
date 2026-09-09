@@ -3,6 +3,7 @@ export type Page =
   | "Songs"
   | "Albums"
   | "Artists"
+  | "Playlists"
   | "Favorites"
   | "Settings";
 
@@ -54,6 +55,16 @@ export type PlayerState = {
 
   shuffle: boolean;
   repeat: PlayerRepeatMode;
+};
+
+export type Playlist = {
+  id: string;
+  title: string;
+  caption: string;
+  cover: string;
+  trackIds: string[];
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type AlbumGroup = {

@@ -3,6 +3,7 @@ import {
   Heart,
   Home,
   ListMusic,
+  Music4,
   Settings,
   UserRound,
 } from "lucide-react";
@@ -21,6 +22,7 @@ const navItems: {
   { label: "Home", icon: Home },
   { label: "Songs", icon: ListMusic },
   { label: "Albums", icon: Album },
+  { label: "Playlists", icon: Music4 },
   { label: "Artists", icon: UserRound },
 ];
 
@@ -36,16 +38,7 @@ export function Sidebar({
   return (
     <aside className="sidebar">
       <div>
-        <div className="brand">
-          <div className="brand-mark">
-            <ListMusic size={19} strokeWidth={1.8} />
-          </div>
-
-          <span>donya</span>
-        </div>
-
         <nav className="sidebar-section">
-          <div className="section-label">LIBRARY</div>
 
           {navItems.map(({ label, icon: Icon }) => (
             <button
@@ -91,10 +84,10 @@ export function Sidebar({
         </button>
 
         <div className="user-card">
-          <div className="user-avatar">A</div>
+          <div className="user-avatar">D</div>
 
           <div className="user-info">
-            <span>Amiri</span>
+            <span>Donya Music Player</span>
             <small>Local library</small>
           </div>
         </div>
